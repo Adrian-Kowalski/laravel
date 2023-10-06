@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('travels', function (Blueprint $table) {
+        Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->boolean('is_public')->default(false);
-            $table->string('slug')->unique();
+            $table->foreignId('travel_id')->constrained('travels');
             $table->string('name');
-            $table->text('description');
-            $table->unsignedInteger('number_of_days');
+            $table->date('string_date');
+            $table->date('ending_date');
+            $table->integer('price');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('travel');
+        Schema::dropIfExists('tours');
     }
 };
